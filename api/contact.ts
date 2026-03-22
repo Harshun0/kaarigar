@@ -14,10 +14,14 @@ const escapeHtml = (value: string) =>
 
 const getString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
-export default async function handler(request: Request) {
-  if (request.method !== "POST") {
-    return json({ error: "Method not allowed" }, 405);
-  }
+export const runtime = "nodejs";
+export const maxDuration = 10;
+
+export function GET() {
+  return json({ error: "Method not allowed" }, 405);
+}
+
+export async function POST(request: Request) {
 
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;

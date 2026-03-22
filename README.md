@@ -31,7 +31,7 @@ The frontend runs on Vite. Local development now includes a Vite middleware for 
 If you deploy on Vercel:
 
 1. Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the project environment settings.
-2. Deploy the project.
+2. Redeploy the project after saving those variables. Existing deployments do not pick up new environment values automatically.
 3. The contact form will post to `/api/contact` and forward submissions to Telegram.
 
 ## Security note
