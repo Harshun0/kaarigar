@@ -25,6 +25,19 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const getResponseError = async (response: Response) => {
+    const contentType = response.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      const result = (await response.json()) as { error?: string; details?: string };
+
+      return result.details ? `${result.error || "Request failed"}: ${result.details}` : result.error;
+    }
+
+    const text = await response.text();
+    return text || `Request failed with status ${response.status}`;
+  };
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
@@ -40,6 +53,8 @@ export default function ContactSection() {
     event.preventDefault();
     setErrorMessage("");
     setIsSubmitting(true);
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch("/api/contact", {
@@ -48,21 +63,25 @@ export default function ContactSection() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
 
-      const result = (await response.json()) as { error?: string };
-
       if (!response.ok) {
-        throw new Error(result.error || "Something went wrong. Please try again.");
+        throw new Error((await getResponseError(response)) || "Something went wrong. Please try again.");
       }
 
       setSubmitted(true);
       setFormData(initialFormState);
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+        error instanceof DOMException && error.name === "AbortError"
+          ? "The request timed out. Please try again."
+          : error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
       );
     } finally {
+      window.clearTimeout(timeoutId);
       setIsSubmitting(false);
     }
   };

@@ -55,22 +55,28 @@ export default async function handler(request: Request) {
     `<b>Message:</b> ${escapeHtml(message)}`,
   ].join("\n");
 
-  const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: telegramMessage,
-      parse_mode: "HTML",
-    }),
-  });
+  try {
+    const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: telegramMessage,
+        parse_mode: "HTML",
+      }),
+    });
 
-  if (!telegramResponse.ok) {
-    const details = await telegramResponse.text();
+    if (!telegramResponse.ok) {
+      const details = await telegramResponse.text();
 
-    return json({ error: "Telegram request failed", details }, 502);
+      return json({ error: "Telegram request failed", details }, 502);
+    }
+  } catch (error) {
+    const details = error instanceof Error ? error.message : "Unknown error";
+
+    return json({ error: "Failed to reach Telegram", details }, 502);
   }
 
   return json({ ok: true });
