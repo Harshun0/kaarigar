@@ -27,8 +27,8 @@ const keywords = [
 export default function SEOHead({
   title = "Kaarigar | Website Development Company in Nagpur for Websites, Apps & AI Chatbots",
   description = "Kaarigar is a website development company in Nagpur building SEO-friendly websites, mobile apps, ecommerce stores, and AI chatbots for local businesses looking for the best website making company near them.",
-  canonical = "https://kaarigar.dev",
-  ogImage = "https://kaarigar.dev/og.png",
+  canonical = "https://www.kaarigar.online/",
+  ogImage = "https://www.kaarigar.online/karigar.png",
 }: SEOProps) {
   const jsonLd = {
     "@context": "https://schema.org",
