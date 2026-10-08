@@ -54,17 +54,17 @@ export function SplineSceneBasic() {
       <div className="relative grid min-h-[34rem] items-end overflow-hidden sm:min-h-[38rem] md:absolute md:inset-0 md:flex md:items-center md:overflow-visible">
         <div className="relative z-10 max-w-md px-5 pt-8 sm:px-8 sm:pt-10 md:absolute md:left-0 md:top-1/2 md:max-w-lg md:-translate-y-1/2 md:p-8">
           <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-            <span className="block">Get Your</span>
+            <span className="block">Create Professional</span>
             <span className="block text-yellow-300 drop-shadow-[0_0_18px_rgba(253,224,71,0.45)]">
-              Dream Website
+              Websites
             </span>
-            <span className="block">In Just Rs 999</span>
+            <span className="block">For Your Brand</span>
           </h1>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-300 sm:mt-4 sm:text-base">
-            A limited-time launch offer for businesses that want a strong online presence without waiting or overspending.
+            From landing pages to full-scale ecommerce — we build fast, modern websites that make your brand stand out and convert visitors into customers.
           </p>
           <p className="mt-2 max-w-sm text-sm font-semibold tracking-wide text-amber-300 sm:text-base">
-            Limited-time offer for the first 10 clients.
+            Trusted by businesses across India.
           </p>
         </div>
 
