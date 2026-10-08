@@ -89,13 +89,7 @@ const projects = [
     tags: ["React.js", "Cafe", "Nagpur"],
     url: "https://huboho.vercel.app/",
   },
-  {
-    title: "Voyage Cafe Vibes",
-    category: "Cafe Website",
-    desc: "A React cafe website for a Pune business, focused on a visual brand experience and smooth browsing across devices.",
-    tags: ["React.js", "Cafe", "Pune"],
-    url: "https://voyage-cafe-vibes.lovable.app/",
-  },
+ 
 ];
 
 const cardV = {
